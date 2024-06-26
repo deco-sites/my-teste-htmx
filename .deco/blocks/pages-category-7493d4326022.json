@@ -15,6 +15,9 @@
       "__resolveType": "Header"
     },
     {
+      "__resolveType": "site/sections/Product/ButtonControl.tsx"
+    },
+    {
       "__resolveType": "site/sections/Product/SearchResult.tsx",
       "page": {
         "__resolveType": "PLP Loader"
