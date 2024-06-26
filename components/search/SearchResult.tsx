@@ -83,7 +83,7 @@ function PageResult(props: SectionProps<typeof loader>) {
   const infinite = layout?.pagination !== "pagination";
 
   return (
-    <div class="grid grid-flow-row grid-cols-1 place-items-center">
+    <div class="grid grid-flow-row grid-cols-1 place-items-center" id="teste">
       <div
         class={clx(
           "pb-2 sm:pb-10",
@@ -244,6 +244,23 @@ function Result(props: SectionProps<typeof loader>) {
     <Sort sortOptions={sortOptions} url={url} />
   );
 
+  const search = useUrlRebased(
+    url,
+    "http://localhost:10503/s?q=all&filter.v.availability=In+stock&page=0",
+  );
+  const buttonSearch = useSection({
+    href: search,
+    props: { partial: "hideLess" },
+  });
+  const searchS = useUrlRebased(
+    url,
+    "http://localhost:10503/s?q=all&filter.v.availability=Out+of+stock&page=0",
+  );
+  const buttonSearchS = useSection({
+    href: searchS,
+    props: { partial: "hideLess" },
+  });
+
   return (
     <>
       <div id={container} {...viewItemListEvent} class="w-full">
@@ -291,7 +308,22 @@ function Result(props: SectionProps<typeof loader>) {
                     <span class="text-base font-semibold h-12 flex items-center">
                       Filters
                     </span>
-
+                    <button
+                      class="bg-primary p-2 "
+                      hx-swap="outerHTML show:parent:top"
+                      hx-get={buttonSearch}
+                      hx-target="#teste"
+                    >
+                      Em estoque
+                    </button>
+                    <button
+                      class="bg-primary p-2 "
+                      hx-swap="outerHTML show:parent:top"
+                      hx-get={buttonSearchS}
+                      hx-target="#teste"
+                    >
+                      Sem estoque
+                    </button>
                     <Filters filters={filters} />
                   </aside>
                 )}
